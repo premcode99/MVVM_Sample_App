@@ -56,7 +56,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
 
     /*ViewModel and Livedata*/
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:1.1.0'
 
     /*New Material design*/
     implementation 'com.google.android.material:material:1.7.0'
