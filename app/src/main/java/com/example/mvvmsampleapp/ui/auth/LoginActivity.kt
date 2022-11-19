@@ -1,13 +1,19 @@
 package com.example.mvvmsampleapp.ui.auth
 
+import android.app.ProgressDialog.show
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ProgressBar
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.mvvmsampleapp.R
 import com.example.mvvmsampleapp.databinding.ActivityLoginBinding
+import com.example.mvvmsampleapp.util.hide
+import com.example.mvvmsampleapp.util.show
 import com.example.mvvmsampleapp.util.toast
+import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(), AuthListener{
 
@@ -21,14 +27,18 @@ class LoginActivity : AppCompatActivity(), AuthListener{
     }
 
     override fun onStarted() {
-        toast("Login Started")
+            progress_bar.show()
     }
 
-    override fun onSuccess() {
-        toast("Login Success")
+    override fun onSuccess(loginResponse: LiveData<String>) {
+        loginResponse.observe(this, Observer {
+            progress_bar.hide()
+            toast(it)
+        })
     }
 
     override fun onFailure(message: String) {
+        progress_bar.hide()
         toast("Login Failure")
     }
 }
